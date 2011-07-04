@@ -5,10 +5,9 @@
 #include "os_cfg.h"
 #include "../../port_src/os_cpu.h"
 #include "../../../src/qos.h"
+#include "../../../src/task.h"
 
 
-
-#define TASK_ID         0
 
 static int32u_t cnt = 0;
 
@@ -30,12 +29,12 @@ void user_tick_hook( int32u_t tick ){
     os_tcb_t tcb;
 
     tick_cnt += tick;
-    //printf( "pass %u tick\n", (unsigned int)tick_cnt );
 
-    //qos_task_tcb( &tcb, 0 );
-    //print_tcb( &tcb );
-    //qos_task_tcb( &tcb, 1 );
-    //print_tcb( &tcb );
+    printf( "pass %u tick\n", (unsigned int)tick_cnt );
+    qos_task_tcb( &tcb, 0 );
+    print_tcb( &tcb );
+    qos_task_tcb( &tcb, 1 );
+    print_tcb( &tcb );
 }
 
 
@@ -46,7 +45,7 @@ static void task_2(void){
     ++cnt;
     printf( "task_2: %u\n", (unsigned int)cnt );
 
-    qos_sleep_tick( 2 );
+    qos_task_sleep_tick( 2 );
 }
 
 
@@ -57,7 +56,7 @@ static void task_1(void){
     ++cnt;
     printf( "task_1: %u\n", (unsigned int)cnt );
 
-    qos_sleep_tick( 5 );
+    qos_task_sleep_tick( 4 );
 } 
 
 

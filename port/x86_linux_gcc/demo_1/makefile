@@ -19,8 +19,9 @@ all: main.c os_cfg.h makefile $(QOS_PORT_SRC)/os_cpu.h $(QOS_PORT_SRC)/os_cpu.c 
 	@gcc -g -D_REENTRANT $(CFLAGS) \
 		-I$(QOS_SRC) -I$(QOS_PORT_SRC) -I$(QOS_PORT_DEMO) \
 		main.c \
-		$(QOS_SRC)/qos.c \
-		$(QOS_PORT_SRC)/os_cpu.c \
+		$(QOS_SRC)/qos.c 			\
+		$(QOS_SRC)/task.c 			\
+		$(QOS_PORT_SRC)/os_cpu.c 	\
 		-lm -lpthread -o $(BIN)
 
 clean:

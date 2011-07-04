@@ -66,7 +66,7 @@ static void ctrl_break_handler( int ctrl ){
 
 
 // function for time tick 'interrupt'
-void *thread_timer_callback( void *parg ){
+static void *thread_timer_callback( void *parg ){
     int res;
     
     // let pthread_cancel() work
@@ -128,9 +128,9 @@ bool qos_port_init(void){
 
 
 
-// debug------------------------
 void qos_verify_process( char const * const express, char const * const file_name, int line ){
     printf( "verify FAIL:%s file:%s @%d\n", express, file_name, line );
 }
 
 
+// no more-----------------------

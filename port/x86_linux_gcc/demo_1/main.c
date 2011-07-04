@@ -5,6 +5,7 @@
 #include "os_cfg.h"
 #include "../../port_src/os_cpu.h"
 #include "../../../src/qos.h"
+#include "../../../src/task.h"
 
 
 
@@ -32,8 +33,10 @@ void user_tick_hook( int32u_t tick ){
 void task_entry_2( void ){
     printf( "task_entry_2: %u\n", (unsigned int)cnt );
 
-    qos_sleep_tick( 2 );
-    qos_task_entry( task_entry_1 );
+    qos_task_sleep_tick( 2 );
+    qos_task_set_entry( task_entry_1 );
+
+    return;
 }
 
 
@@ -44,8 +47,8 @@ void task_entry_1( void ){
     ++cnt;
     printf( "task_entry_1: %u\n", (unsigned int)cnt );
 
-    qos_sleep_tick( 5 );
-    qos_task_entry( task_entry_2 );
+    qos_task_sleep_tick( 5 );
+    qos_task_set_entry( task_entry_2 );
     
     return; 
 } 
